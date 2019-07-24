@@ -241,14 +241,14 @@ module.exports = function(layoutData, opts) {
           return value;
         } else {
           let valueNum =
-            typeof value == 'string' ? value.replace(/(px)|(rem)/, '') : value;
+            typeof value == 'string' ? value.replace(/(upx)|(rem)/, '') : value;
           if (valueNum == 1 || ['fontSize'].indexOf(key) > -1) {
-            return valueNum + 'px';
+            return valueNum + 'upx';
           }
           if (
             typeof value == 'number' ||
             value - 0 == value ||
-            value.match(/px$/)
+            value.match(/upx$/)
           ) {
             value = parseFloat(value);
             return htmlFontsize
@@ -256,7 +256,7 @@ module.exports = function(layoutData, opts) {
                   (value * (viewportWidth / designWidth)) /
                   htmlFontsize
                 ).toFixed(2) + 'rem'
-              : value + 'px';
+              : value + 'upx';
           } else {
             return value;
           }
